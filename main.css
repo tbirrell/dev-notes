@@ -1,0 +1,18 @@
+.dev-note {
+  padding: 20px;
+  color: #000;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #FBF0AB;
+  opacity: .9;
+  border-radius: 3px;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  max-width: 250px;
+  z-index: 1000
+}
+.new-note {
+  width: 250px;
+}
+.edit {
+  max-width: calc(100% - 6px);
+}
