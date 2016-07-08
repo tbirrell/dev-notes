@@ -4,7 +4,10 @@
   "version": "1.0",
   "author": "tbirrell",
   "background" : {
-    "scripts": ["jquery-3.0.0.min.js", "background.js"]
+    "scripts": [
+      "includes/jquery-3.0.0.min.js",
+      "background.js"
+    ]
   },
   "permissions": [
     "contextMenus",
@@ -16,15 +19,23 @@
     "default_title": "Click to enable Devnotes for this domain"
   },
   "icons": {
-    "16": "icon-16.png",
-    "48": "icon-48.png",
-    "128": "icon-128.png"
+    "16": "img/icon-16.png",
+    "48": "img/icon-48.png",
+    "128": "img/icon-128.png"
   },
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
-      "js": ["jquery-3.0.0.min.js", "jquery-ui.min.js", "main.js"],
-      "css":["main.css"]
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "includes/jquery-3.0.0.min.js",
+        "includes/jquery-ui.min.js",
+        "main.js"
+      ],
+      "css":[
+        "main.css"
+      ]
     }
   ]
 }

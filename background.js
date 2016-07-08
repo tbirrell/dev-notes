@@ -21,7 +21,7 @@ function enable_ext(tabId) {
 
   //colorize browser icon
   chrome.browserAction.setIcon({
-    "path": "icon-48.png"
+    "path": "img/icon-48.png"
   });
 }
 
@@ -41,7 +41,7 @@ function disable_ext(tabId) {
 
   //fade browser icon
   chrome.browserAction.setIcon({
-    "path": "bw-48.png"
+    "path": "img/bw-48.png"
   });
 }
 
@@ -73,6 +73,8 @@ chrome.webNavigation.onCompleted.addListener(function(page){
       if (cookie.value == 'enabled') {
         enable_ext(page.tabId);
       }
+    } else {
+      disable_ext(page.tabId);
     }
   });
 });

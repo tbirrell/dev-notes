@@ -108,7 +108,7 @@ $(document).on('mouseup', '.dev-note', function(){
 });
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
-  console.log("tap");
+  // console.log(request);
   if (request.note == "new") {
     addNew();
   } else if (request.note == "enabled") {
@@ -118,6 +118,5 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
       $(this).remove();
     });
   }
-  console.log(request);
   sendResponse({status: "recived"});
 });
