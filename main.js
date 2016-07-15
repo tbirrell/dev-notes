@@ -15,7 +15,7 @@ function setCSS(selector, top, left) {
 
 function ajaxPost(selector) {
   $.ajax({
-    url: 'http://devnotes.timothy.office.fmaustin.com',
+    url: window.location.protocol + '//devnotes.timothy.office.fmaustin.com',
     method: 'POST',
     data: {
       api: 'post',
@@ -32,21 +32,19 @@ function ajaxPost(selector) {
 }
 function ajaxGet() {
   $.ajax({
-    url: 'http://devnotes.timothy.office.fmaustin.com',
+    url: window.location.protocol + '//devnotes.timothy.office.fmaustin.com',
     method: 'GET',
     data: {
       api: 'get',
       url: window.location.href
     },
     success: function(msg){
-      console.log(msg);
       populate(msg);
     }
   });
 }
 
 function populate(json) {
-  console.log(json);
   $.each(json, function() {
     $('body').append('<div class="dev-note" id="' + this.id + '">' + this.textval + '</div>');
     var note = $('#' + this.id);
@@ -66,7 +64,7 @@ function addNew() {
 
 function deleteNote(noteId) {
   $.ajax({
-    url: 'http://devnotes.timothy.office.fmaustin.com',
+    url: window.location.protocol + '//devnotes.timothy.office.fmaustin.com',
     method: 'POST',
     data: {
       api: 'delete',
