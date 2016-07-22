@@ -17,7 +17,15 @@ function setCSS(selector, top, left) {
   $(selector).css('left', left); //set left
 }
 
-var baseurl = '//192.168.15.50:3000';
+
+/**
+ * Set URL for ajax
+ */
+var baseurl;
+chrome.storage.sync.get("baseurl" , function(items) {
+  baseurl = items.baseurl;
+});
+
 
 /**
  * Sends note to API
@@ -128,7 +136,9 @@ $(window).bind('beforeunload', function() {
  */
 $(document).on('mouseup', '.dev-note', function(){
   if ($(this).css('position') == 'fixed') {
-    $(this).css('position', 'absolute')
+    var topval = $(this).offset().top;
+    $(this).css('position', 'absolute');
+    $(this).css('top', topval);
   }
 });
 

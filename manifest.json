@@ -3,6 +3,10 @@
   "name": "DevNotes",
   "version": "1.0",
   "author": "tbirrell",
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
   "background" : {
     "scripts": [
       "includes/jquery-3.0.0.min.js",
@@ -13,6 +17,7 @@
     "contextMenus",
     "cookies",
     "webNavigation",
+    	"storage",
     "*://*/*"
   ],
   "browser_action": {
