@@ -3,9 +3,9 @@
  */
 function setCSS(selector, top, left) {
   var winWidth = $(window).width(); //get window width
-  var leftWidth = left.substring(0, left.length - 2); //get int of leftval
+  var leftWidth = left.substring(0, left.length - 2); //get int of left
 
-  $(selector).css('top', top); // set topval
+  $(selector).css('top', top); // set top
   $(selector).css('position', 'absolute'); // set postion
 
   // if location is off right side of screen, bring it into view.
@@ -14,23 +14,22 @@ function setCSS(selector, top, left) {
     left = left + 'px';
   }
 
-  $(selector).css('left', left); //set leftval
+  $(selector).css('left', left); //set left
 }
+
+var baseurl = '//192.168.15.50:3000';
 
 /**
  * Sends note to API
  */
-function ajaxPost(selector) {
+function ajaxPost(el) {
   $.ajax({
-    url: window.location.protocol + '//devnotes.timothy.office.fmaustin.com',
-    method: 'POST',
+    url: baseurl + '/page/' + md5(window.location.href) + '/note/' + el.attr('id'),
+    method: 'PUT',
     data: {
-      api: 'post',
-      id: selector.attr('id'),
-      top: selector.css('top'),
-      left: selector.css('left'),
-      text: selector.text(),
-      url: window.location.href
+      top: el.css('top'),
+      left: el.css('left'),
+      text: el.text(),
     },
     success: function(msg){
       console.log(msg);
@@ -43,14 +42,11 @@ function ajaxPost(selector) {
  */
 function ajaxGet() {
   $.ajax({
-    url: window.location.protocol + '//devnotes.timothy.office.fmaustin.com',
+    url: baseurl + '/page/' + md5(window.location.href),
     method: 'GET',
-    data: {
-      api: 'get',
-      url: window.location.href
-    },
-    success: function(msg){
-      populate(msg);
+    success: function(msgs){
+      console.log(msgs);
+      populate(msgs);
     }
   });
 }
@@ -58,11 +54,11 @@ function ajaxGet() {
 /**
  * Cycles through note data from API and displays them
  */
-function populate(json) {
-  $.each(json, function() {
-    $('body').append('<div class="dev-note" id="' + this.id + '">' + this.textval + '</div>');
-    var note = $('#' + this.id);
-    setCSS(note, this.topval, this.leftval);
+function populate(msgs) {
+  $.each(msgs, function() {
+    $('body').append('<div class="dev-note" id="' + this.timestamp + '">' + this.text + '</div>');
+    var note = $('#' + this.timestamp);
+    setCSS(note, this.top, this.left);
     $(note).draggable();
   });
 }
@@ -84,17 +80,14 @@ function addNew() {
  */
 function deleteNote(noteId) {
   $.ajax({
-    url: window.location.protocol + '//devnotes.timothy.office.fmaustin.com',
-    method: 'POST',
-    data: {
-      api: 'delete',
-      id: noteId,
-    },
+    url: baseurl + '/page/' + md5(window.location.href) + '/note/' + noteId,
+    method: 'DELETE',
     success: function(res) {
       console.log(res);
     }
   });
 }
+
 
 /**
  * Listens for double click and enabled editing of note
